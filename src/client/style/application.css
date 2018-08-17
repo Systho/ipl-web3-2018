@@ -1,9 +1,8 @@
-$titleColor: green;
 body {
     text-align: center;
     margin: auto;
 }
 
 h1 {
-    color: $titleColor;
+    color: green;
 }
