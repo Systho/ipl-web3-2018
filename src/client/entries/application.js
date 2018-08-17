@@ -2,7 +2,13 @@ import "../style/application.scss";
 import image from "../images/react.png";
 
 
-console.log("Bonjour");
+fetch("/users/current")
+    .then((response) => { return response.json() })
+    .then((currentUser) => {
+        var helloElem = document.createElement('span');
+        helloElem.innerText = ` : Bonjour ${currentUser.firstName}`;
+        document.body.querySelector("h1").appendChild(helloElem);
+    })
 
 var imageElem = document.createElement('img');
 imageElem.setAttribute('src', image);
