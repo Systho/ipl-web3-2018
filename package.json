@@ -8,7 +8,8 @@
     "build": "webpack --mode production",
     "client": "webpack-dev-server --mode development --config config/webpack.config.js",
     "server": "nodemon src/server/bin/www",
-    "dev": "concurrently \"npm run server\" \"npm run client\""
+    "dev": "concurrently \"npm run server\" \"npm run client\"",
+    "heroku-postbuild" :"npm run build"
   },
   "dependencies": {
     "cookie-parser": "~1.4.3",
