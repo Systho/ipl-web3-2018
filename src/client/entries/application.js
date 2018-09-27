@@ -1,4 +1,4 @@
-import "../style/application.css";
+import "../style/application.scss";
 import image from "../images/react.png";
 
 
