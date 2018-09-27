@@ -6,6 +6,8 @@ const cookieParser = require('cookie-parser');
 const logger = require('morgan');
 const sassMiddleware = require('node-sass-middleware');
 
+const assetPath = require('./asset_path.js');
+
 const indexRouter = require('./routes/index');
 const usersRouter = require('./routes/users');
 
@@ -14,12 +16,7 @@ const serverRoot = path.join(__dirname, '.');
 
 const app = express();
 
-// view engine setup
-if (fs.existsSync(path.join(projectRoot, 'dist'))) {
-  app.locals.assetsBaseUrl = '';
-} else {
-  app.locals.assetsBaseUrl = '//localhost:3000';
-}
+app.locals.assetPath = assetPath;
 
 app.set('views', path.join(__dirname, 'views'));
 app.set('view engine', 'ejs');
