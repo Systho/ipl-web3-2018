@@ -1,12 +1,29 @@
 {
-  "extends": ["airbnb"],
+  "extends": [
+    "eslint:recommended",
+    "plugin:react/recommended"
+  ],
   "env": {
     "browser": true,
+    "es6": true,
     "node": true
+  },
+  "parserOptions": {
+    "ecmaVersion": 6,
+    "sourceType": "module",
+    "ecmaFeatures": {
+      "jsx": true,
+      "modules": true,
+      "experimentalObjectRestSpread": true
+    }
   },
   "rules": {
     "no-console": "off",
     "comma-dangle": "off",
-    "react/jsx-filename-extension": "off"
+    "react/jsx-filename-extension": "off",
+    "react/prefer-stateless-function": "off",
+    "react/prop-types": "off",
+    "react/jsx-one-expression-per-line": "off",
+    "react/destructuring-assignment": "off"
   }
 }

@@ -15,6 +15,9 @@ function buildConfig(env, argv) {
     entry: {
       application: './src/client/entries/application.js'
     },
+    resolve: {
+      extensions: ['.js', '.jsx', '.json']
+    },
     output: {
       path: path.join(projectRoot, outputDirectory),
       filename: isDevelopment ? '[name].js' : '[name]-[hash].js',
@@ -24,7 +27,7 @@ function buildConfig(env, argv) {
     module: {
       rules: [
         {
-          test: /\.js$/,
+          test: /\.(js|jsx)$/,
           exclude: /node_modules/,
           use: {
             loader: 'babel-loader'
