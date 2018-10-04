@@ -1,0 +1,26 @@
+  .tabs {
+      .tabs-title {
+
+        display: flex;
+        flex: 0 0 auto;
+        align-items: flex-end;
+        position: relative;
+        margin: 0;
+        border: none;
+        padding: 0;
+        list-style: none;
+
+
+        li {
+            flex: 1 0 auto;
+            position: relative;
+            cursor: pointer;
+            max-width: 100%;
+            vertical-align: top;
+
+            &.selected {
+                color: blue;
+            }
+        }
+      }
+  }
