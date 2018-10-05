@@ -24,7 +24,8 @@
     "react": "^16.3.1",
     "react-dom": "^16.3.1",
     "sass-loader": "^7.1.0",
-    "webpack-manifest-plugin": "^2.0.4"
+    "webpack-manifest-plugin": "^2.0.4",
+    "yarn": "^1.10.1"
   },
   "devDependencies": {
     "babel-core": "^6.26.0",
