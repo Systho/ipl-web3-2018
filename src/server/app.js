@@ -8,6 +8,8 @@ const sassMiddleware = require('node-sass-middleware');
 
 const assetPath = require('./asset_path.js');
 
+const db = require('./modules/db.js');
+
 const indexRouter = require('./routes/index');
 const usersRouter = require('./routes/users');
 
@@ -15,6 +17,23 @@ const projectRoot = path.join(__dirname, '../..');
 const serverRoot = path.join(__dirname, '.');
 
 const app = express();
+
+// Connect to DB, and insert default user if necessary
+db.connect().then((db) => {
+  let collection = db.collection('users');
+  collection.countDocuments().then((res) => {
+    if (res === 0) {
+      collection.insertOne({
+        login: 'laurent',
+        password: 'laurent',
+        firstName: 'Laurent',
+        lastName: 'Leleux'
+      }).catch((err) => {
+        console.log('[App] Unable to insert default user');
+      });
+    }
+  })
+});
 
 app.locals.assetPath = assetPath;
 
