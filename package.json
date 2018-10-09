@@ -9,7 +9,7 @@
     "clean": "rm -rf dist",
     "client": "webpack-dev-server --mode development --config config/webpack.config.js",
     "server": "nodemon src/server/bin/www",
-    "dev": "set NODE_ENV=development&& concurrently \"yarn run server\" \"yarn run client\"",
+    "dev": "cross-env NODE_ENV=development concurrently \"yarn run server\" \"yarn run client\"",
     "heroku-postbuild": "yarn run build"
   },
   "dependencies": {
@@ -37,6 +37,7 @@
     "babel-preset-react": "^6.24.1",
     "clean-webpack-plugin": "^0.1.19",
     "concurrently": "^3.5.1",
+    "cross-env": "^5.2.0",
     "css-loader": "^1.0.0",
     "eslint": "^5.0.0",
     "eslint-config-airbnb": "^17.0.0",
