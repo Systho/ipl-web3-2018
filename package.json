@@ -9,7 +9,7 @@
     "clean": "rm -rf dist",
     "client": "webpack-dev-server --mode development --config config/webpack.config.js",
     "server": "nodemon src/server/bin/www",
-    "dev": "NODE_ENV=development concurrently \"yarn run server\" \"yarn run client\"",
+    "dev": "set NODE_ENV=development && concurrently \"yarn run server\" \"yarn run client\"",
     "heroku-postbuild": "yarn run build"
   },
   "dependencies": {
