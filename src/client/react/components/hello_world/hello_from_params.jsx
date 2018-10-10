@@ -1,19 +1,18 @@
 import React from 'react';
 import { Alert } from 'react-bootstrap';
 
-class HelloWorld extends React.Component {
-
-  render() {
-    const { name } = this.props;
-
+const HelloFromParams = ({
+  match: {
+    params: {
+      name
+    }
+  },
+}) => {
     return (
       <Alert variant='info'>
         Hello { name }
       </Alert>
     );
-  }
-}
+};
 
-
-
-export default HelloWorld;
+export default HelloFromParams;

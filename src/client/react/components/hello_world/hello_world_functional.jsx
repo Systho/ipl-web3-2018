@@ -1,12 +1,13 @@
 import React from 'react';
+import { Alert } from 'react-bootstrap';
 
 const HelloWorldFunctional = ({
   name,
 }) => {
     return (
-      <div>
+      <Alert variant='info'>
         Hello { name }
-      </div>
+      </Alert>
     );
 };
 

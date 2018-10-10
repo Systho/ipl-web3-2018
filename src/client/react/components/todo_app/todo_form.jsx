@@ -1,4 +1,6 @@
 import React from "react";
+import Form from 'react-bootstrap/lib/Form';
+import Button from 'react-bootstrap/lib/Button';
 
 const TodoForm = ({
   handleSubmit,
@@ -7,11 +9,19 @@ const TodoForm = ({
   currentText
 }) => {
   return (
-    <form onSubmit={handleSubmit}>
-      <label htmlFor="new-todo">What needs to be done?</label>
-      <input id="new-todo" onChange={handleChange} value={currentText} />
-      <button>Add #{nextPosition}</button>
-    </form>
+    <Form onSubmit={handleSubmit}>
+      <Form.Group>
+        <Form.Label>Task</Form.Label>
+        <Form.Control type="text" placeholder="Feed the cat" onChange={handleChange} value={currentText} />
+        <Form.Text className="text-muted">
+          What needs to be done?
+        </Form.Text>
+      </Form.Group>
+
+       <Button variant="primary" type="submit">
+        Add #{nextPosition}
+      </Button>
+    </Form>
   );
 };
 
