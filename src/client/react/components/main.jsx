@@ -1,25 +1,60 @@
-import React from 'react';
-import HelloWorld from './hello_world/hello_world';
-import TodoAppContainer from './todo_app/todo_app_container';
-import TabsContainer from './tabs/tabs_container';
-import Tab from './tabs/tab';
+import React from "react";
+import { HashRouter, Route } from "react-router-dom";
+import { Container, Row, Col } from "react-bootstrap";
+import Navigation from "./navigation/navigation";
+import HelloWorld from "./hello_world/hello_world";
+import HelloFromParams from "./hello_world/hello_from_params";
+import TodoAppContainer from "./todo_app/todo_app_container";
 
 class Main extends React.Component {
-  render() {
-    const myName = 'Bob';
+  constructor(props){
+    super(props);
+    this.state= {
+      name: "..."
+    }
+  }
 
+  updateNameFromWebservice(){
+    fetch("/users/current")
+      .then((response) => { return response.json() })
+      .then((currentUser) => {
+        this.setState({
+          name: currentUser.firstName,
+        })
+      })
+      .catch((error) => {
+        console.error(error);
+        this.setState({
+          name: "ERROR",
+        })
+      })
+  }
+
+  componentDidMount(){
+    setTimeout(this.updateNameFromWebservice.bind(this), 5000);    
+  }
+
+  render() {
     return (
-      <ul>
-        <li><HelloWorld name={myName} /></li>
-        <li><TodoAppContainer /></li>
-        <li>
-          <TabsContainer >
-            <Tab title="Red" panel={<h3>Red</h3>} />
-            <Tab title="Blue" panel={<h3>Blue</h3>} />
-            <Tab title="Green" panel={<h3>Green</h3>} />
-          </TabsContainer >
-        </li>
-      </ul>
+      <HashRouter>
+        <React.Fragment>
+          <Navigation />
+
+          <Container>
+            <Row>
+              <Col xs={2} />
+              <Col xs={8}>
+                <Route exact path="/" render={() => <HelloWorld name={this.state.name} />} />
+                <Route path="/hello/:name" component={HelloFromParams} />
+                <Route path="/todo" component={TodoAppContainer} />
+              </Col>
+              <Col xs={2} />
+            </Row>
+          </Container>
+
+          
+        </React.Fragment>
+      </HashRouter>
     );
   }
 }
