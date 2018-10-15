@@ -15,7 +15,7 @@ class Main extends React.Component {
   }
 
   updateNameFromWebservice(){
-    fetch("/users/current")
+    fetch("/api/users/current")
       .then((response) => { return response.json() })
       .then((currentUser) => {
         this.setState({

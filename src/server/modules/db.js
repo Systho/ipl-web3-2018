@@ -1,7 +1,8 @@
 /**
  * Imports
  */
-const MongoClient = require('mongodb').MongoClient;
+const mongodb = require('mongodb');
+const MongoClient = mongodb.MongoClient;
 const assert = require('assert');
 
 
@@ -42,3 +43,4 @@ let connect = () => {
  */
 exports.connect = connect;
 exports.db = null; // db will be set after connected;
+exports.ObjectID = mongodb.ObjectID;

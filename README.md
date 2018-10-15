@@ -35,6 +35,14 @@ In the production mode, we will have only 1 server running. All the client side 
 ## Quick Start
 
 
+### Create .env file at project root
+
+```
+DB_URL='mongodb://<user:<password>@ds125723.mlab.com:25723/ipl-web3-2018'
+DB_DB='ipl-web3-2018'
+```
+
+
 ### Install system dependencies
 
 - Install Node v8/v10 : (https://nodejs.org)
