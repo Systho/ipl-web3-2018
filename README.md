@@ -47,8 +47,6 @@ DB_DB='ipl-web3-2018'
 
 - Install Node v8/v10 : (https://nodejs.org)
 
-- Install yarn : (https://yarnpkg.com)
-
 
 
 ### Install Project dependencies
@@ -61,16 +59,16 @@ git clone XXXX
 cd simple-react-full-stack
 
 # Install dependencies
-yarn (or npm install)
+npm install
 
 # Start development server
-yarn dev (or npm run dev)
+npm run dev
 
 # Build for production
-yarn build (or npm run build)
+npm run build
 
 # Start production server
-yarn start (or npm start)
+npm start
 ```
 
 ## Documentation
@@ -232,7 +230,7 @@ This starts a server and listens on port 8080 for connections. The app responds 
 
 ### Concurrently
 
-[Concurrently](https://github.com/kimmobrunfeldt/concurrently) is used to run multiple commands concurrently. I am using it to run the webpack dev server and the backend node server concurrently in the development environment. Below are the npm/yarn script commands used.
+[Concurrently](https://github.com/kimmobrunfeldt/concurrently) is used to run multiple commands concurrently. I am using it to run the webpack dev server and the backend node server concurrently in the development environment. Below are the npm script commands used.
 
 ```javascript
 "client": "webpack-dev-server --mode development --devtool inline-source-map --hot",
