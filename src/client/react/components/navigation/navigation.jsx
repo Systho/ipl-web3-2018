@@ -13,6 +13,7 @@ const Navigation = () => {
         <Nav className="mr-auto">
           <Nav.Link as={Link} to="/" >Hello</Nav.Link>
           <Nav.Link as={Link} to="/todo" >Todo</Nav.Link>
+          <Nav.Link as={Link} to="/messages" >Messages</Nav.Link>
         </Nav>
        <SearchForm />
       </Navbar>
