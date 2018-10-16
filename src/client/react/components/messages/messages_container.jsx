@@ -1,5 +1,6 @@
 import React from "react";
 import MessagesComponent from "./messages_component";
+import sendApiRequest from "react/utils/api";
 
 class MessagesContainer extends React.Component {
   constructor(props) {
@@ -11,7 +12,7 @@ class MessagesContainer extends React.Component {
 
 
   fetchMessages(){
-    fetch("/api/messages")
+    sendApiRequest({ url: "/api/messages" })
       .then((response) => { return response.json() })
       .then((messages) => {
         this.setState({
@@ -28,12 +29,10 @@ class MessagesContainer extends React.Component {
 
   deleteMessage(message){
     const url = `/api/messages/${message._id}`
-    fetch(
+    sendApiRequest({
         url,
-        {
-          method: "DELETE",
-        }
-        )
+        method: "DELETE",
+      })
       .then((_ignored) => {
         const {messages} = this.state;
 

@@ -1,5 +1,6 @@
 import React from "react";
 import MessageComponent from "./message_component";
+import sendApiRequest from "react/utils/api";
 
 class MessageContainer extends React.Component {
   constructor(props) {
@@ -13,7 +14,7 @@ class MessageContainer extends React.Component {
 
   fetchMessage(){
     const url = `/api/messages/${this.state.id}`;
-    fetch(url)
+    sendApiRequest({ url })
       .then((response) => { return response.json() })
       .then((message) => {
         this.setState({

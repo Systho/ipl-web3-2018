@@ -16,7 +16,8 @@ function buildConfig(env, argv) {
       application: './src/client/entries/application.js'
     },
     resolve: {
-      extensions: ['.js', '.jsx', '.json']
+      extensions: ['.js', '.jsx', '.json'],
+      modules: ['node_modules', "src/client"]
     },
     output: {
       path: path.join(projectRoot, outputDirectory),
