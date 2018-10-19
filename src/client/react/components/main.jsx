@@ -1,6 +1,8 @@
 import React from "react";
 import { HashRouter, Route } from "react-router-dom";
 import { Container, Row, Col } from "react-bootstrap";
+import sendApiRequest from 'react/utils/api';
+
 import Navigation from "./navigation/navigation";
 import HelloWorld from "./hello_world/hello_world";
 import HelloFromParams from "./hello_world/hello_from_params";
@@ -18,8 +20,7 @@ class Main extends React.Component {
   }
 
   updateNameFromWebservice(){
-    fetch("/api/users/current")
-      .then((response) => { return response.json() })
+    sendApiRequest("/api/users/current")
       .then((currentUser) => {
         this.setState({
           name: currentUser.firstName,

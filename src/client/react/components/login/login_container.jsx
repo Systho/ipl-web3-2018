@@ -1,6 +1,7 @@
 import React from 'react';
-import LoginComponent from './login_component';
 import { Redirect } from 'react-router-dom';
+import LoginComponent from './login_component';
+import { createSession } from 'react/services/session';
 
 
 class LoginContainer extends React.Component {
@@ -24,19 +25,25 @@ class LoginContainer extends React.Component {
         })
     }
 
-    authenticate(){
-        console.log("email : ", this.state.email);
-        console.log("password : ", this.state.password);
-        // send email and password to API
-        //retrieve JWT
-        //store jwt into localStorage
+    authenticate(e){
+        e.preventDefault();
 
-        const jwt = "FAKE JWT";
-        localStorage.setItem("JWT", JSON.stringify(jwt));
-        this.setState({
-            jwt: jwt,
-            authenticated: true,
-        })
+        const {
+            email, 
+            password,
+        } = this.state;
+
+        console.log("email : ", email);
+        console.log("password : ", password);
+        // send email and password to API
+
+        createSession(email, password)
+            .then( jwt => {
+                this.setState({
+                    jwt: jwt,
+                    authenticated: true,
+                })
+            });   
     }
 
 

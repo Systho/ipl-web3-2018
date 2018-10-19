@@ -15,7 +15,6 @@ class MessageContainer extends React.Component {
   fetchMessage(){
     const url = `/api/messages/${this.state.id}`;
     sendApiRequest({ url })
-      .then((response) => { return response.json() })
       .then((message) => {
         this.setState({
           message: message,

@@ -13,7 +13,6 @@ class MessagesContainer extends React.Component {
 
   fetchMessages(){
     sendApiRequest({ url: "/api/messages" })
-      .then((response) => { return response.json() })
       .then((messages) => {
         this.setState({
           messages: messages,
