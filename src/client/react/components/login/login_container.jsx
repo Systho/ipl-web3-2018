@@ -1,7 +1,7 @@
 import React from 'react';
 import { Redirect } from 'react-router-dom';
+
 import LoginComponent from './login_component';
-import { createSession } from 'react/services/session';
 
 
 class LoginContainer extends React.Component {
@@ -27,23 +27,7 @@ class LoginContainer extends React.Component {
 
     authenticate(e){
         e.preventDefault();
-
-        const {
-            email, 
-            password,
-        } = this.state;
-
-        console.log("email : ", email);
-        console.log("password : ", password);
-        // send email and password to API
-
-        createSession(email, password)
-            .then( jwt => {
-                this.setState({
-                    jwt: jwt,
-                    authenticated: true,
-                })
-            });   
+        // use login from injected context
     }
 
 
@@ -51,8 +35,11 @@ class LoginContainer extends React.Component {
         const {
             email,
             password,
-            authenticated,
         } = this.state;
+        const {
+            jwt,
+        } = this.props;
+        const authenticated = !!jwt;
 
         return (
             <React.Fragment>
@@ -72,4 +59,4 @@ class LoginContainer extends React.Component {
 }
 
 
-export default LoginContainer
+export default LoginContainer;
