@@ -1,6 +1,7 @@
 import React from 'react';
 import { Redirect } from 'react-router-dom';
 
+import {withAuthentication} from 'react/contexts/authentication';
 import LoginComponent from './login_component';
 
 
@@ -11,8 +12,6 @@ class LoginContainer extends React.Component {
         this.state = {
             email: "",
             password: "",
-            authenticated: false,
-            jwt: null,
         };
 
         this.authenticate = this.authenticate.bind(this);
@@ -26,8 +25,10 @@ class LoginContainer extends React.Component {
     }
 
     authenticate(e){
+        const { login } = this.props;
+        const { email, password } = this.props;
         e.preventDefault();
-        // use login from injected context
+        login({email, password});
     }
 
 
@@ -59,4 +60,4 @@ class LoginContainer extends React.Component {
 }
 
 
-export default LoginContainer;
+export default withAuthentication(LoginContainer);

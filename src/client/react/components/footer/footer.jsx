@@ -1,17 +1,24 @@
-import React from 'react';
+import React from "react";
 
-import Navbar from 'react-bootstrap/lib/Navbar';
-import { withAuthentication } from "react/contexts/authentication.js";
+import { Navbar, Nav, Button } from "react-bootstrap";
+import { withAuthentication } from "react/contexts/authentication";
+import { withTheme } from "react/contexts/theme";
 
-
-const Navigation = ({ jwt }) => {
-    return (
-        <Navbar bg="dark" variant="dark" fixed="bottom" >
-        <Navbar.Brand>Current JWT : { jwt } </Navbar.Brand>
-        
-      </Navbar>
-    );
-}
+const Navigation = ({ jwt, theme, toggleTheme }) => {
+  return (
+    <Navbar bg={theme} variant={theme} fixed="bottom">
+      <Nav className="mr-auto">
+        <Navbar.Brand>Current JWT : {jwt} </Navbar.Brand>
+      </Nav>
+      <Button variant="outline-info" onClick={toggleTheme}>
+        Change Theme
+      </Button>
+    </Navbar>
+  );
+};
 
 const NavigationWithAuthentication = withAuthentication(Navigation);
-export default NavigationWithAuthentication;
+const NavigationWithAuthenticationAndTheme = withTheme(
+  NavigationWithAuthentication
+);
+export default NavigationWithAuthenticationAndTheme;

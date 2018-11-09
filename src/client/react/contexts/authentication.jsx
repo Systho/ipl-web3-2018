@@ -4,6 +4,7 @@ import * as Session from 'react/services/session.js'
 
 const AuthenticationContext = React.createContext({
   jwt: null,
+  isAuthenticated: false,
   login: () => {},
   logout: () => {}
 });
@@ -14,8 +15,12 @@ class AuthenticationProvider extends React.Component {
   constructor(props) {
     super(props);
 
+    const jwt = localStorage.getItem("JWT");
+    const isAuthenticated = !!jwt;
+
     this.state = {
-      jwt: localStorage.getItem("JWT")
+      jwt,
+      isAuthenticated,
     };
 
     this.login = this.login.bind(this);
@@ -28,28 +33,29 @@ class AuthenticationProvider extends React.Component {
       .then( jwt => {
         this.setState({
           jwt: jwt,
+          isAuthenticated: !!jwt,
         })
       })
   }
   logout() {
-    return Session
-      .deleteSession()
-      .then( () => {
-        this.setState({
+    Session.deleteSession();
+
+    this.setState({
           jwt: null,
-        })
-      })
+          isAuthenticated: false,
+    });
   }
 
   render() {
     const { login, logout } = this;
-    const { jwt } = this.state;
+    const { jwt, isAuthenticated } = this.state;
     const { children } = this.props;
 
     const providerValues = {
       jwt,
+      isAuthenticated,
       login,
-      logout
+      logout,
     };
     return (
       <AuthenticationContext.Provider value={providerValues}>

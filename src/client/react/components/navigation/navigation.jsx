@@ -1,14 +1,15 @@
 import React from 'react';
-
-import Navbar from 'react-bootstrap/lib/Navbar';
-import Nav from 'react-bootstrap/lib/Nav';
+import { Nav, Navbar, Button } from 'react-bootstrap';
 import { Link } from 'react-router-dom';
+
+import {withAuthentication} from 'react/contexts/authentication';
+import {withTheme} from 'react/contexts/theme';
 import SearchForm from './search_form';
 
 
-const Navigation = () => {
+const Navigation = ({ logout, theme }) => {
     return (
-        <Navbar bg="dark" variant="dark">
+        <Navbar bg={ theme } variant={ theme }>
         <Navbar.Brand as={Link} to="/">Navbar</Navbar.Brand>
         <Nav className="mr-auto">
           <Nav.Link as={Link} to="/" >Hello</Nav.Link>
@@ -17,9 +18,10 @@ const Navigation = () => {
           <Nav.Link as={Link} to="/login" >Login</Nav.Link>
         </Nav>
        <SearchForm />
+       <Button variant="outline-warning" onClick={ logout }>Logout</Button>
       </Navbar>
     );
 }
 
 
-export default Navigation;
+export default withTheme(withAuthentication(Navigation));
