@@ -5,6 +5,7 @@ const fs = require('fs');
 const cookieParser = require('cookie-parser');
 const logger = require('morgan');
 const sassMiddleware = require('node-sass-middleware');
+var jwt = require('jsonwebtoken');
 
 const assetPath = require('./asset_path.js');
 
@@ -13,11 +14,14 @@ const db = require('./modules/db.js');
 const indexRouter = require('./routes/index');
 const usersRouter = require('./routes/users');
 const messagesRouter = require('./routes/messages');
+const sessionsRouter = require('./routes/sessions');
 
 const projectRoot = path.join(__dirname, '../..');
 const serverRoot = path.join(__dirname, '.');
 
 const app = express();
+
+const jwtSecret = process.env.JWT_SECRET;
 
 // Connect to DB, and insert default user if necessary
 db.connect().then((db) => {
@@ -35,6 +39,26 @@ db.connect().then((db) => {
     }
   })
 });
+
+const authMiddleware = (req, res, next) => {
+  var token = req.get('authorization');
+	if (!token) {
+		res.status(401).send('A token is mandatory');
+		return;
+	}
+	jwt.verify(token, jwtSecret, (err, decoded) => {
+		if (err) {
+			res.status(401).send('Unable to parse token');
+			return;
+		}
+		if (decoded.exp <= Date.now()) {
+			res.status(401).send('Token has expired');
+			return;
+		}
+    req.token = decoded;
+    next();
+	});
+}
 
 app.locals.assetPath = assetPath;
 
@@ -57,6 +81,8 @@ app.use(express.static(path.join(__dirname, 'public')));
 app.use(express.static(path.join(__dirname, '../../dist')));
 
 app.use('/', indexRouter);
+app.use('/api/sessions', sessionsRouter);
+app.use(authMiddleware);
 app.use('/api/users', usersRouter);
 app.use('/api/messages', messagesRouter);
 

@@ -26,7 +26,7 @@ class LoginContainer extends React.Component {
 
     authenticate(e){
         const { login } = this.props;
-        const { email, password } = this.props;
+        const { email, password } = this.state;
         e.preventDefault();
         login({email, password});
     }
